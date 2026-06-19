@@ -12,7 +12,7 @@ Estado actual: API en FastAPI que sube video/audio, lo guarda en disco local y t
 
 ## Prioridad media
 
-- [ ] **Exportar video con subtitulos quemados**: endpoint nuevo `POST /videos/{id}/export` que use ffmpeg para renderizar el video final con los subtitulos superpuestos (estilo CapCut), devolviendo un archivo descargable.
+- [x] **Exportar video con subtitulos quemados**: endpoint nuevo `POST /videos/{id}/export` que use ffmpeg para renderizar el video final con los subtitulos superpuestos (estilo CapCut), devolviendo un archivo descargable.
 - [ ] **Edicion de transcripcion**: endpoint `PATCH /videos/{id}/transcript` para que el usuario corrija texto/tiempos de un segmento y se persista el cambio.
 - [ ] **Deteccion automatica de silencios**: endpoint que devuelva rangos de silencio (usando ffmpeg silencedetect) para soportar "auto-cut" en el frontend.
 - [ ] **Soporte multi-idioma explicito**: permitir pasar `language` opcional al transcribir en vez de autodetectar siempre.
