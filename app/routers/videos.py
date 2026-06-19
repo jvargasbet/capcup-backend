@@ -10,7 +10,9 @@ from app.models.schemas import UploadResponse
 
 router = APIRouter(prefix="/videos", tags=["videos"])
 
-ALLOWED_EXTENSIONS = {".mp4", ".mov", ".webm", ".mkv", ".avi"}
+VIDEO_EXTENSIONS = {".mp4", ".mov", ".webm", ".mkv", ".avi"}
+AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".aac", ".ogg", ".flac"}
+ALLOWED_EXTENSIONS = VIDEO_EXTENSIONS | AUDIO_EXTENSIONS
 
 
 @router.post("/upload", response_model=UploadResponse)
@@ -25,7 +27,11 @@ async def upload_video(file: UploadFile) -> UploadResponse:
     with dest_path.open("wb") as out_file:
         shutil.copyfileobj(file.file, out_file)
 
-    return UploadResponse(video_id=video_id, filename=dest_path.name)
+    return UploadResponse(
+        video_id=video_id,
+        filename=dest_path.name,
+        is_audio=suffix in AUDIO_EXTENSIONS,
+    )
 
 
 @router.get("/{video_id}/file")
