@@ -17,3 +17,9 @@ class TranscriptResponse(BaseModel):
     video_id: str
     language: str
     segments: list[TranscriptSegment]
+
+
+class TranscriptSegmentUpdate(BaseModel):
+    text: str | None = None
+    start: float | None = None
+    end: float | None = None
