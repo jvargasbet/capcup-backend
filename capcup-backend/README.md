@@ -19,6 +19,14 @@ uvicorn app.main:app --reload --port 8000
 - `POST /videos/{video_id}/transcribe` — transcribe el audio del video y devuelve segmentos con texto, `start` y `end`.
 - `GET /health` — chequeo de estado.
 
+## Tests
+
+```bash
+pytest
+```
+
+Los tests usan un video mp4 minimo y mockean el servicio de transcripcion, asi no requieren descargar el modelo de Whisper.
+
 ## Variables de entorno
 
 - `WHISPER_MODEL_SIZE` (default `base`): tamaño del modelo Whisper (`tiny`, `base`, `small`, `medium`, `large-v3`).

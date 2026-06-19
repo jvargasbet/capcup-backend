@@ -3,6 +3,7 @@ import './App.css'
 import { transcribeVideo, uploadVideo, videoFileUrl } from './api/client'
 import type { TranscriptSegment } from './api/client'
 import SubtitleTimeline from './components/SubtitleTimeline'
+import CaptionOverlay from './components/CaptionOverlay'
 
 type Status = 'idle' | 'uploading' | 'transcribing' | 'ready' | 'error'
 
@@ -62,13 +63,16 @@ function App() {
           {status === 'error' && <p className="status-msg error">{errorMessage}</p>}
 
           {videoId && (
-            <video
-              ref={videoRef}
-              className="video-preview"
-              src={videoFileUrl(videoId)}
-              controls
-              onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
-            />
+            <div className="video-stage">
+              <video
+                ref={videoRef}
+                className="video-preview"
+                src={videoFileUrl(videoId)}
+                controls
+                onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
+              />
+              <CaptionOverlay segments={segments} currentTime={currentTime} />
+            </div>
           )}
         </section>
 
